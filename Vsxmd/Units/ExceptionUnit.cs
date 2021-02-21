@@ -56,14 +56,14 @@ namespace Vsxmd.Units
 
             var table = new[]
             {
-                "| Name | Description |",
+                "| 名称 | 描述 |",
                 "| ---- | ----------- |",
             }
             .Concat(markdowns);
 
             return new[]
             {
-                "##### Exceptions",
+                "##### 异常",
                 string.Join("\n", table),
             };
         }

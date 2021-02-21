@@ -33,7 +33,9 @@ namespace Vsxmd.Units
         {
             this.name = new MemberName(
                 this.GetAttribute("name"),
-                this.GetChildren("param").Select(x => x.Attribute("name").Value));
+                this.GetChildren("param").Select(x => x.Attribute("name").Value),
+                this.GetChildren("typeparam").Select(x => x.Attribute("name").Value)
+                );
         }
 
         /// <summary>
@@ -66,8 +68,8 @@ namespace Vsxmd.Units
                 ? Enumerable.Empty<string>()
                 : new[]
                 {
-                    "##### Summary",
-                    "*Inherit from parent.*",
+                    "##### 概要",
+                    "*从父继承.*",
                 };
 
         private IEnumerable<string> Namespace =>
@@ -75,7 +77,7 @@ namespace Vsxmd.Units
             ? Enumerable.Empty<string>()
             : new[]
             {
-                $"##### Namespace",
+                $"##### 命名空间",
                 $"{this.name.Namespace}",
             };
 

@@ -23,7 +23,8 @@ namespace Vsxmd.Units
         /// <returns>The member kind's lowercase name.</returns>
         internal static string ToLowerString(this MemberKind memberKind) =>
 #pragma warning disable CA1308 // We use lower case in URL anchor.
-            memberKind.ToString().ToLowerInvariant();
+            // memberKind.ToString().ToLowerInvariant();
+            memberKind.GetDescription();
 #pragma warning restore CA1308
 
         /// <summary>
@@ -48,9 +49,14 @@ namespace Vsxmd.Units
         /// Escape the content to keep it raw in Markdown syntax.
         /// </summary>
         /// <param name="content">The content.</param>
+        /// <param name="typeparamNames">The param names.</param>
         /// <returns>The escaped content.</returns>
-        internal static string Escape(this string content) =>
-            content.Replace("`", @"\`", StringComparison.InvariantCulture);
+        internal static string Escape(this string content, IEnumerable<string> typeparamNames)
+        {
+            return !content.Contains("`") || typeparamNames == null
+                ? content
+                : $"{content.Substring(0, content.IndexOf("`", StringComparison.Ordinal))}&lt;{string.Join(", ", typeparamNames)}&gt;";
+        }
 
         /// <summary>
         /// Generate an anchor for the <paramref name="href"/>.
@@ -91,7 +97,7 @@ namespace Vsxmd.Units
         internal static string AsCode(this string code)
         {
             string backticks = "`";
-            while (code.Contains(backticks, StringComparison.InvariantCulture))
+            while (code.Contains(backticks))
             {
                 backticks += "`";
             }
@@ -151,7 +157,7 @@ namespace Vsxmd.Units
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape().TrimStart(' ').Replace("            ", string.Empty, StringComparison.InvariantCulture);
+                return text.Value.Escape(null).TrimStart(' ').Replace("            ", string.Empty);
             }
 
             var child = node as XElement;
@@ -170,7 +176,7 @@ namespace Vsxmd.Units
                     case "code":
                         var lang = child.Attribute("lang")?.Value ?? string.Empty;
 
-                        string value = child.Nodes().First().ToString().Replace("\t", "    ", StringComparison.InvariantCulture);
+                        string value = child.Nodes().First().ToString().Replace("\t", "    ");
                         var indexOf = FindIndexOf(value);
 
                         var codeblockLines = value.Split(Environment.NewLine.ToCharArray())

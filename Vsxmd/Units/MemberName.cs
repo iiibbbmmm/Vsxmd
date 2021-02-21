@@ -22,16 +22,19 @@ namespace Vsxmd.Units
 
         private readonly IEnumerable<string> paramNames;
 
+        private readonly IEnumerable<string> typeparamNames;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
-        internal MemberName(string name, IEnumerable<string> paramNames)
+        internal MemberName(string name, IEnumerable<string> paramNames, IEnumerable<string> typeparamNames)
         {
             this.name = name;
             this.type = name.First();
             this.paramNames = paramNames;
+            this.typeparamNames = typeparamNames;
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         internal MemberName(string name)
-            : this(name, null)
+            : this(name, null, null)
         {
         }
 
@@ -54,9 +57,9 @@ namespace Vsxmd.Units
             ? MemberKind.Constants
             : this.type == 'P'
             ? MemberKind.Property
-            : this.type == 'M' && this.name.Contains(".#ctor", StringComparison.InvariantCulture)
+            : this.type == 'M' && this.name.Contains(".#ctor")
             ? MemberKind.Constructor
-            : this.type == 'M' && !this.name.Contains(".#ctor", StringComparison.InvariantCulture)
+            : this.type == 'M' && !this.name.Contains(".#ctor")
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
@@ -68,10 +71,10 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type ||
             this.Kind == MemberKind.Constants ||
             this.Kind == MemberKind.Property
-            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape(this.typeparamNames)}](#{this.Href} '{this.StrippedName}')"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape(this.typeparamNames)}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
             : string.Empty;
 
         /// <summary>
@@ -84,13 +87,13 @@ namespace Vsxmd.Units
         /// </example>
         internal string Caption =>
             this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape(this.typeparamNames)} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape(this.typeparamNames)} `{this.Kind.ToLowerString()}`"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape(this.typeparamNames)}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}`"
             : string.Empty;
 
         /// <summary>
@@ -215,8 +218,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
+            ? $"[{this.GetReferenceName(useShortName).Escape(this.typeparamNames)}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
+            : $"[{this.GetReferenceName(useShortName).Escape(this.typeparamNames)}](#{this.Href} '{this.StrippedName}')";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName

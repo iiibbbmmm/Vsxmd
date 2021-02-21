@@ -3,7 +3,7 @@
   <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
