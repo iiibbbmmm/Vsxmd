@@ -63,7 +63,7 @@ namespace Vsxmd.Units
 
             return new[]
             {
-                "##### 异常",
+                "##### &nbsp;&nbsp;&nbsp;&nbsp;异常",
                 string.Join("\n", table),
             };
         }

@@ -30,7 +30,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"- {this.GetAttribute("cref").ToReferenceLink()}",
+                $"- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.GetAttribute("cref").ToReferenceLink()}",
             };
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Vsxmd.Units
 
             return new[]
             {
-                "##### 另请参阅",
+                "##### &nbsp;&nbsp;&nbsp;&nbsp;另请参阅",
                 string.Join("\n", markdowns),
             };
         }
