@@ -30,7 +30,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown() =>
             new[]
             {
-                $"##### &nbsp;&nbsp;&nbsp;&nbsp;例子",
+                $"&nbsp;&nbsp;&nbsp;&nbsp;例子",
                 $"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.ElementContent}",
             };
 

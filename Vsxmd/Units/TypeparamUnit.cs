@@ -63,7 +63,7 @@ namespace Vsxmd.Units
 
             return new[]
             {
-                "##### &nbsp;&nbsp;&nbsp;&nbsp;泛型",
+                "&nbsp;&nbsp;&nbsp;&nbsp;泛型",
                 string.Join("\n", table),
             };
         }

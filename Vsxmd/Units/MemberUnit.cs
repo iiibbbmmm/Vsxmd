@@ -68,7 +68,7 @@ namespace Vsxmd.Units
                 ? Enumerable.Empty<string>()
                 : new[]
                 {
-                    "##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;概要",
+                    "&nbsp;&nbsp;&nbsp;&nbsp;概要",
                     "*从父继承.*",
                 };
 
@@ -77,7 +77,7 @@ namespace Vsxmd.Units
             ? Enumerable.Empty<string>()
             : new[]
             {
-                $"##### &nbsp;&nbsp;&nbsp;&nbsp;命名空间",
+                $"&nbsp;&nbsp;&nbsp;&nbsp;命名空间",
                 $"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.name.Namespace}",
             };
 

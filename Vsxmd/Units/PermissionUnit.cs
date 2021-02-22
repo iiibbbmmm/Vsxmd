@@ -63,7 +63,7 @@ namespace Vsxmd.Units
 
             return new[]
             {
-                "##### &nbsp;&nbsp;&nbsp;&nbsp;权限",
+                "&nbsp;&nbsp;&nbsp;&nbsp;权限",
                 string.Join("\n", table),
             };
         }
