@@ -3,7 +3,7 @@
   <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -20,30 +20,25 @@
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
   <PropertyGroup>
     <Title>Vsxmd</Title>
-    <Version>1.0.0</Version>
-    <Authors>Kingleung Lai</Authors>
-    <Description>VS XML documentation -&gt; Markdown syntax. (Chinese Simplified)
-Fork from https://github.com/lijunle/Vsxmd</Description>
-    <Copyright>Copyright 2021-Present</Copyright>
+    <Version>0.0.0</Version>
+    <Authors>Junle Li, Sales Lessa Lopes</Authors>
+    <Description>VS XML documentation -&gt; Markdown syntax.</Description>
+    <Copyright>Copyright 2015-Present</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/iiibbbmmm/Vsxmd</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/lijunle/Vsxmd</PackageProjectUrl>
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Kingleung Lai</Company>
-    <PackageId>Vsxmd-cn</PackageId>
-    <Product>Vsxmd-cn</Product>
   </PropertyGroup>
-  <!--<ItemGroup>
-    --><!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets --><!--
+  <ItemGroup>
+    <!-- The parameter _PackageFiles is declared in NuGet.Build.Tasks.Pack.targets -->
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-musl-x64\publish\Vsxmd" PackagePath="tools\linux-musl-x64\" />
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\linux-x64\publish\Vsxmd" PackagePath="tools\linux-x64\" />
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\osx-x64\publish\Vsxmd" PackagePath="tools\osx-x64\" />
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x64\publish\Vsxmd.exe" PackagePath="tools\win-x64\" />
     <_PackageFiles Include="bin\$(Configuration)\$(TargetFramework)\win-x86\publish\Vsxmd.exe" PackagePath="tools\win-x86\" />
-  </ItemGroup>-->
+  </ItemGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
     <Content Include="build\Vsxmd.targets" PackagePath="build\" />
