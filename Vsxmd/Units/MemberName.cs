@@ -29,6 +29,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
+        /// <param name="typeparamNames">The type parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
         internal MemberName(string name, IEnumerable<string> paramNames, IEnumerable<string> typeparamNames)
         {
             this.name = name;
