@@ -1,3 +1,12 @@
+# 定制化
+为Azure DevOps定制
+1、粗略修正泛型产生的`1问题，只能勉强应对并列的单层泛型情况
+2、汉化文档关键字，按中文习惯增加缩进
+3、将目录改为Azure DevOps的[[_TOC]]标记
+4、对应3将不需要显示在TOC中的#####去除
+5、将生成文档默认路径改为../markdown，方便git提交在DevOps中生成wiki
+
+
 # Vsxmd
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/lijunle/Vsxmd/master.svg?logo=AppVeyor&logoColor=white)](https://ci.appveyor.com/project/lijunle/vsxmd/branch/master)
